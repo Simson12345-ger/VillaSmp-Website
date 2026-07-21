@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Villa SMP — Premium Minecraft Survival Server</title>
+    <meta name="description" content="Villa SMP - Your ultimate Minecraft Survival experience. Join our friendly community, climb the ranks, and survive together.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Favicon (Inline SVG Grass Block) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%234ade80'/><rect y='25' width='100' height='75' fill='%2378542a'/></svg>">
+</head>
+<body>
+
+    <!-- ===== LOADING SCREEN ===== -->
+    <div id="loader" class="loader">
+        <div class="loader-content">
+            <div class="loader-block">
+                <div class="loader-block-top"></div>
+                <div class="loader-block-side"></div>
+            </div>
+            <div class="loader-text">VILLA SMP</div>
+            <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+        </div>
+    </div>
+
+    <!-- ===== PARTICLE BACKGROUND CANVAS ===== -->
+    <canvas id="particles" class="particles"></canvas>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">
+                <div class="nav-logo-icon">
+                    <div class="grass-block"></div>
+                </div>
+                <span class="nav-logo-text">VILLA<span class="text-green">SMP</span></span>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#info" class="nav-link">Server</a></li>
+                <li><a href="#updates" class="nav-link">Updates</a></li>
+                <li><a href="#ranks" class="nav-link">Ranks</a></li>
+                <li><a href="#guide" class="nav-link">Guide</a></li>
+                <li><a href="#faq" class="nav-link">FAQ</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="#" class="nav-link nav-discord" id="navDiscordBtn">Discord</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== HERO SECTION ===== -->
+    <header id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge reveal">
+                <span class="status-dot"></span>
+                <span id="heroStatus">Checking server status...</span>
+            </div>
+            <h1 class="hero-title reveal">
+                Welcome to <span class="gradient-text">Villa SMP</span>
+            </h1>
+            <p class="hero-subtitle reveal">Your ultimate Minecraft Survival experience.</p>
+            
+            <!-- Server IP Card -->
+            <div class="hero-ip reveal">
+                <div class="ip-label">Server Address</div>
+                <div class="ip-value">
+                    <span id="serverIp">VillaSmp.eagler.host</span>
+                    <button class="copy-btn" id="copyIpBtn" title="Copy IP">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    </button>
+                </div>
+                <div class="ip-copied" id="ipCopied">Copied to clipboard!</div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="hero-buttons reveal">
+                <button class="btn btn-primary" id="joinBtn">
+                    <span>Join Server</span>
+                </button>
+                <a href="#" class="btn btn-discord" id="discordBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.010c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.010c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                    <span>Discord</span>
+                </a>
+                <a href="#" class="btn btn-vote" id="voteBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.51 0 4.78 1.03 6.41 2.68"/></svg>
+                    <span>Vote</span>
+                </a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+            <span>Scroll to explore</span>
+        </div>
+    </header>
+
+    <!-- ===== INFO CARDS SECTION ===== -->
+    <section id="info" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">// Server Info</span>
+                <h2 class="section-title">Server <span class="gradient-text">Information</span></h2>
+                <p class="section-desc">Everything you need to know about Villa SMP at a glance.</p>
+            </div>
+            <div class="info-cards">
+                <div class="info-card reveal">
+                    <div class="info-icon">🎮</div>
+                    <h3>Server Version</h3>
+                    <p>Minecraft 1.8.8</p>
+                </div>
+                <div class="info-card reveal">
+                    <div class="info-icon">⚔️</div>
+                    <h3>Game Mode</h3>
+                    <p>Survival</p>
+                </div>
+                <div class="info-card reveal">
+                    <div class="info-icon">👥</div>
+                    <h3>Community</h3>
+                    <p>Friendly Minecraft Community</p>
+                </div>
+                <div class="info-card reveal">
+                    <div class="info-icon">✨</div>
+                    <h3>Features</h3>
+                    <p>Custom Systems, Events, Ranks, Crates</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FEATURES SECTION ===== -->
+    <section id="features" class="section section-alt">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">// Features</span>
+                <h2 class="section-title">Why <span class="gradient-text">Villa SMP</span>?</h2>
+                <p class="section-desc">Discover what makes our survival server truly special.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="feature-icon green">⚒️</div>
+                    <h3>Survival Gameplay</h3>
+                    <p>Pure vanilla-inspired survival with quality-of-life enhancements. Build, mine, and thrive in a balanced world.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon blue">💰</div>
+                    <h3>Player Economy</h3>
+                    <p>A player-driven economy with shops, auctions, and a balanced currency system. Trade your way to wealth.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon green">🏆</div>
+                    <h3>Ranks</h3>
+                    <p>Progress through meaningful ranks that unlock new commands, perks, and prestige on the server.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon blue">🎁</div>
+                    <h3>Crates</h3>
+                    <p>Open magical crates filled with rare items, cosmetics, and powerful gear. Earn keys through events and voting.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon green">🎉</div>
+                    <h3>Events</h3>
+                    <p>Regular community events including build battles, PvP tournaments, scavenger hunts, and seasonal celebrations.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon blue">🏗️</div>
+                    <h3>Community Projects</h3>
+                    <p>Join massive collaborative builds, community towns, and shared mega-projects with fellow players.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon green">⚙️</div>
+                    <h3>Custom Systems</h3>
+                    <p>Unique plugins and custom-coded features you won't find anywhere else, built specifically for Villa SMP.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon blue">🛡️</div>
+                    <h3>Active Staff</h3>
+                    <p>Friendly, fair, and active moderation team ensuring a safe and enjoyable experience for everyone.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== UPDATES SECTION ===== -->
+    <section id="updates" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">// Changelog</span>
+                <h2 class="section-title">Latest <span class="gradient-text">Updates</span></h2>
+                <p class="section-desc">Stay up to date with the newest features and improvements.</p>
+            </div>
+            <div class="updates-list" id="updatesList">
+                <div class="updates-loading">Loading updates...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RANKS SECTION ===== -->
+    <section id="ranks" class="section section-alt">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">// Hierarchy</span>
+                <h2 class="section-title">Server <span class="gradient-text">Ranks</span></h2>
+                <p class="section-desc">Climb the ladder and earn your place in the Villa SMP community.</p>
+            </div>
+            <div class="ranks-grid">
+                <div class="rank-card reveal" data-rank="player">
+                    <div class="rank-banner">PLAYER</div>
+                    <div class="rank-icon">🟢</div>
+                    <h3>Player</h3>
+                    <p class="rank-desc">The default rank every member starts with. Begin your survival journey here.</p>
+                    <ul class="rank-perms">
+                        <li>Access to basic commands</li>
+                        <li>Set up to 3 homes</li>
+                        <li>Participate in events</li>
+                        <li>Use /spawn, /warp, /tpa</li>
+                        <li>Access to public shops</li>
+                    </ul>
+                </div>
+                <div class="rank-card reveal" data-rank="supporter">
+                    <div class="rank-banner">SUPPORTER</div>
+                    <div class="rank-icon">💎</div>
+                    <h3>Supporter</h3>
+                    <p class="rank-desc">Members who support the server and unlock extra perks and quality-of-life features.</p>
+                    <ul class="rank-perms">
+                        <li>Up to 8 homes</li>
+                        <li>Colored chat name</li>
+                        <li>Access to /hat and /nick</li>
+                        <li>Priority queue access</li>
+                        <li>Monthly crate keys</li>
+                    </ul>
+                </div>
+                <div class="rank-card reveal" data-rank="moderator">
+                    <div class="rank-banner">MODERATOR</div>
+                    <div class="rank-icon">🛡️</div>
+                    <h3>Moderator</h3>
+                    <p class="rank-desc">Trusted staff who keep the community safe and enforce the rules fairly.</p>
+                    <ul class="rank-perms">
+                        <li>Staff chat access</li>
+                        <li>Kick & mute permissions</li>
+                        <li>/tp & teleport to players</li>
+                        <li>Vanish access</li>
+                        <li>Ticket management</li>
+                    </ul>
+                </div>
+                <div class="rank-card reveal" data-rank="manager">
+                    <div class="rank-banner">MANAGER</div>
+                    <div class="rank-icon">👑</div>
+                    <h3>Manager</h3>
+                    <p class="rank-desc">Senior staff responsible for overseeing the team and managing server operations.</p>
+                    <ul class="rank-perms">
+                        <li>Ban & unban permissions</li>
+                        <li>Event management tools</li>
+                        <li>Staff oversight</li>
+                        <li>Access to staff dashboard</li>
+                        <li>Conflict resolution</li>
+                    </ul>
+                </div>
+                <div class="rank-card reveal" data-rank="developer">
+                    <div class="rank-banner">DEVELOPER</div>
+                    <div class="rank-icon">⚙️</div>
+                    <h3>Developer</h3>
+                    <p class="rank-desc">The technical team building custom plugins, features, and maintaining the server.</p>
+                    <ul class="rank-perms">
+                        <li>Console access</li>
+                        <li>Plugin management</li>
+                        <li>Custom feature deployment</li>
+                        <li>Bug fixes & patches</li>
+                        <li>Server optimization</li>
+                    </ul>
+                </div>
+                <div class="rank-card reveal" data-rank="owner">
+                    <div class="rank-banner">OWNER</div>
+                    <div class="rank-icon">⭐</div>
+                    <h3>Owner</h3>
+                    <p class="rank-desc">The visionary behind Villa SMP. Final say on all server decisions and direction.</p>
+                    <ul class="rank-perms">
+                        <li>Full server access</li>
+                        <li>Financial management</li>
+                        <li>Final decision authority</li>
+                        <li>Strategic planning</li>
+                        <li>Community leadership</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVER GUIDE SECTION ===== -->
+    <section id="guide" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">// Getting Started</span>
+                <h2 class="section-title">Server <span class="gradient-text">Guide</span></h2>
+                <p class="section-desc">New to Villa SMP? Follow these steps to get started.</p>
+            </div>
+            
+            <div class="guide-steps">
+                <div class="guide-step reveal">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>How to Join</h3>
+                        <p>Open Minecraft Java Edition 1.8.8, click "Multiplayer", then "Add Server". Enter the server address <code>VillaSmp.eagler.host</code> and click "Done". Join and start playing!</p>
+                    </div>
+                </div>
+                <div class="guide-step reveal">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>How to Start</h3>
+                        <p>Once you spawn, read the rules at spawn, grab your starter kit, and venture out into the wild. Use <code>/rtp</code> to teleport to a random location and begin building your base.</p>
+                    </div>
+                </div>
+                <div class="guide-step reveal">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Important Commands</h3>
+                        <p>Learn these essential commands to navigate and enjoy the server:</p>
+                        <div class="commands-grid">
+                            <div class="command"><code>/spawn</code><span>Teleport to spawn</span></div>
+                            <div class="command"><code>/warp</code><span>Open warp menu</span></div>
+                            <div class="command"><code>/help</code><span>See all commands</span></div>
+                            <div class="command"><code>/tpa</code><span>Request teleport</span></div>
+                            <div class="command"><code>/home</code><span>Teleport home</span></div>
+                            <div class="command"><code>/sethome</code><span>Set a home</span></div>
+                            <div class="command"><code>/money</code><span>Check balance</span></div>
+                            <div class="command"><code>/msg</code><span>Private message</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FAQ SECTION ===== -->
+    <section id="faq" class="section section-alt">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">// Questions</span>
+                <h2 class="section-title">Frequently Asked <span class="gradient-text">Questions</span></h2>
+                <p class="section-desc">Got questions? We've got answers. Also try asking VillaAI!</p>
+            </div>
+            <div class="faq-list" id="faqList">
+                <!-- FAQ items loaded from script.js knowledge base -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT SECTION ===== -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">// Get in Touch</span>
+                <h2 class="section-title">Join the <span class="gradient-text">Community</span></h2>
+                <p class="section-desc">Connect with us and become part of the Villa SMP family.</p>
+            </div>
+            <div class="contact-grid">
+                <a href="#" class="contact-card reveal" id="contactDiscord">
+                    <div class="contact-icon discord">💬</div>
+                    <h3>Discord</h3>
+                    <p>Join our active Discord community with thousands of members.</p>
+                    <span class="contact-link">Join Discord →</span>
+                </a>
+                <a href="#" class="contact-card reveal" id="contactVote">
+                    <div class="contact-icon vote">🗳️</div>
+                    <h3>Vote</h3>
+                    <p>Support the server by voting daily and earn amazing rewards.</p>
+                    <span class="contact-link">Vote Now →</span>
+                </a>
+                <a href="#" class="contact-card reveal" id="contactEmail">
+                    <div class="contact-icon email">✉️</div>
+                    <h3>Email</h3>
+                    <p>For business inquiries and partnership opportunities.</p>
+                    <span class="contact-link">staff@villasmp.com →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="nav-logo">
+                        <div class="grass-block"></div>
+                        <span class="nav-logo-text">VILLA<span class="text-green">SMP</span></span>
+                    </div>
+                    <p>Your ultimate Minecraft Survival experience. Build, survive, and thrive with a friendly community.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>Navigation</h4>
+                        <a href="#home">Home</a>
+                        <a href="#info">Server</a>
+                        <a href="#updates">Updates</a>
+                        <a href="#ranks">Ranks</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Resources</h4>
+                        <a href="#guide">Guide</a>
+                        <a href="#faq">FAQ</a>
+                        <a href="#contact">Contact</a>
+                        <a href="#" id="footerDiscord">Discord</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Server</h4>
+                        <a href="#" id="footerCopyIp">Copy IP</a>
+                        <a href="#" id="footerVote">Vote</a>
+                        <a href="#">Rules</a>
+                        <a href="#">Store</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Villa SMP. Not affiliated with Mojang or Microsoft.</p>
+                <p>Built with ❤️ for the Minecraft community</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== VILLAAI CHAT ASSISTANT ===== -->
+    <div class="villa-ai" id="villaAi">
+        <!-- Floating Button -->
+        <button class="ai-fab" id="aiFab" aria-label="Open VillaAI">
+            <div class="ai-fab-icon">🤖</div>
+            <span class="ai-fab-label">VillaAI</span>
+            <span class="ai-fab-pulse"></span>
+        </button>
+        
+        <!-- Chat Window -->
+        <div class="ai-chat" id="aiChat">
+            <div class="ai-chat-header">
+                <div class="ai-chat-info">
+                    <div class="ai-avatar">🤖</div>
+                    <div>
+                        <div class="ai-name">VillaAI</div>
+                        <div class="ai-status"><span class="status-dot online"></span> Online</div>
+                    </div>
+                </div>
+                <button class="ai-close" id="aiClose" aria-label="Close chat">✕</button>
+            </div>
+            <div class="ai-chat-body" id="aiChatBody">
+                <div class="ai-message">
+                    <div class="ai-avatar small">🤖</div>
+                    <div class="ai-bubble">
+                        Hi there! 👋 I'm <strong>VillaAI</strong>, your assistant for Villa SMP. Ask me anything about the server, ranks, commands, or how to join!
+                    </div>
+                </div>
+                <div class="ai-suggestions" id="aiSuggestions">
+                    <button class="ai-suggestion" data-q="What is Villa SMP?">What is Villa SMP?</button>
+                    <button class="ai-suggestion" data-q="How do I join?">How do I join?</button>
+                    <button class="ai-suggestion" data-q="What ranks exist?">What ranks exist?</button>
+                    <button class="ai-suggestion" data-q="What commands can I use?">What commands?</button>
+                </div>
+            </div>
+            <div class="ai-chat-input">
+                <input type="text" id="aiInput" placeholder="Ask VillaAI anything..." autocomplete="off">
+                <button class="ai-send" id="aiSend" aria-label="Send message">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
